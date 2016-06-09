@@ -8,7 +8,7 @@ public class ParseToTextFile {
 		//NEED AUTO DETECTION FOR PATH LOCATIONS
 		String pathLocation = GUI.SQ_LOCATION;
 		//Could have included this method in this class, however I'm keeping it organized in case I need more for data collection
-		List<String> lines = ObtainDataFromTextFile.getLines(pathLocation);
+		List<String> lines = ObtainDataFromFiles.getLines();
 	}
 
 }

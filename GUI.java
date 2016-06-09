@@ -31,7 +31,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
-import java.util.Scanner;
 import javax.swing.*;
 import javax.swing.JFrame;
 public class GUI  extends JFrame{
@@ -48,12 +47,12 @@ public class GUI  extends JFrame{
 	private JFileChooser SQchooser = new JFileChooser();
 	private JFileChooser OutputChooser = new JFileChooser();
 	private JLabel welcomeText = new JLabel("This is your first run. Please specify a directory for the SUNQuest files: ");
-	private JLabel welcomeText2 = new JLabel("Please specify a location for the output: ");
-	
+	private JLabel welcomeText2 = new JLabel("Please specify a location for the output: ");	
 	public GUI() throws IOException{
 		File f = new File(CONF_LOCATION);
-	    Container mainPanel = this.getContentPane(); 
+	    JPanel mainPanel = new JPanel(new FlowLayout());
 	    mainPanel.setLayout(new FlowLayout());
+	    mainPanel.setBackground(GREY);
 	    convertButton.setBackground(Color.GREEN);
 	    //convertButton.setSize(100,100);
 	    convertButton.setPreferredSize(new Dimension(100,100));
@@ -63,8 +62,9 @@ public class GUI  extends JFrame{
 		this.setContentPane(mainPanel);
 	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Exit program if close-window button clicked
 	    setTitle("Sirius Replacement"); // "super" JFrame sets title
-	    setBackground(GREY);
+	    //setBackground(GREY);
 	    setSize(600, 400);         // "super" JFrame sets initial size
+	    setMaximumSize(new Dimension(Integer.MAX_VALUE,Integer.MAX_VALUE));
 	    setVisible(true);  
 		if (isFirstRun(f) == true) {
 			firstRunInitialization();
@@ -102,9 +102,8 @@ public class GUI  extends JFrame{
 		    mainPanel.remove(OutputChooser);
 		    mainPanel.remove(welcomeText2);
 		    mainPanel.add(helloWorld);
+		    mainPanel.add(convertButton);
 		    mainPanel.revalidate();	
-		    
-		
 		}
 	}
 	public static void firstRunInitialization() throws IOException{
@@ -167,8 +166,6 @@ public class GUI  extends JFrame{
 	public static List<String> readLines(String aFileName) throws IOException {
 		return Files.readAllLines(Paths.get(aFileName), StandardCharsets.UTF_8);
 	}
-	
-	
 	public static boolean isFirstRun(File f) throws IOException {
 		//names are not final
 		//NEED TO FIND USERNAMES FOR MORE SPECIFIC TARGETING
